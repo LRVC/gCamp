@@ -10,11 +10,27 @@
 
 <%= yield %>
 
+
+  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+          <a class="navbar-brand" href="#">gSchool</a>
+      </div>
+    </div>
+  </nav>
+
+
   <div class="container">
-    <div class="footer">
+    <div class = "footer">
       <%= link_to 'Terms', terms_path %>
       <%= link_to 'About', about_path %>
+      <div class= "footer_image">
+        <%= link_to image_tag('linked_in.jpg', :width => 28, :height => 25), "https://www.linkedin.com/in/reecevancleve" %>
+        <%= link_to image_tag('GitHub.jpg', :width => 25, :height => 25), "https://github.com/LRVC" %>
+        <%= link_to image_tag('Twitter.jpg', :width => 25, :height => 25), "https://twitter.com/RV_C" %>
+      </div>
     </div>
+
   </div>
 
 </body>
