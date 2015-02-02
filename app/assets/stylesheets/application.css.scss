@@ -1,13 +1,16 @@
 body { padding-top: 70px; }
 
-.footer_image {
+footer.col-md-4 {
 
   float:right;
 
 }
-.footer {
+
+footer {
+  border-top:1px solid gray;
   padding-top:5px;
-  padding-bottom:10px;
+  padding-bottom:5px;
+
 }
 
 

@@ -7,6 +7,3 @@ class WelcomeController < ApplicationController
       ]
   end
 end
-
-
-@exampleArrray = [{key: "pianos"}]
