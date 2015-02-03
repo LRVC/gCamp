@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Frequently Asked Questions</h1>
+  </div>
+
+  <ul>
+      <li><a href= <% tag %> </li>
+
+  </ul>
+
+  <% @faqArrayVar.each do |position| %>
+
+      <h3><%= position[:question] %></h3></br>
+
+          <%= position[:answer] %></br></br>
+          <% tag(position[:slugs]) %>
+  <% end %>
+
+</div>
