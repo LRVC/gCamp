@@ -3,17 +3,23 @@
     <h1>Frequently Asked Questions</h1>
   </div>
 
+  <a name= "top"></a>
+
   <ul>
-      <li><a href= <% tag %> </li>
+
+      <% @faqArrayVar.each do |position| %>
+        <li><%= link_to "#{position[:question]}", faq_path(@faq, anchor: "#{position[:slug]}") %>
+      <%end%>
 
   </ul>
 
   <% @faqArrayVar.each do |position| %>
 
-      <h3><%= position[:question] %></h3></br>
+          <h3><%= position[:question] %></h3></br>
+              <%= position[:answer] %></br></br>
+          <a name= "<%=position[:slug]%>"></a>
+          <a href="#top">top</a>
 
-          <%= position[:answer] %></br></br>
-          <% tag(position[:slugs]) %>
-  <% end %>
+      <% end %>
 
 </div>
