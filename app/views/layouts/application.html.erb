@@ -16,6 +16,13 @@
     </div>
   </nav>
 
+  <div class= "container">
+
+    <p><% if notice %></p>
+        <%= notice %><br>
+       <% end %>
+  </div>
+
   <%= yield %>
 
   <div class="container">
@@ -25,7 +32,8 @@
           <div class="col-md-4">
             <%= link_to 'Terms', terms_path %> |
             <%= link_to 'About', about_path %> |
-            <%= link_to 'FAQ', faq_path %>
+            <%= link_to 'FAQ', faq_path %> |
+            <%= link_to 'Tasks', tasks_path %>
           </div>
           <div class="col-md-8 text-right">
             <%= link_to image_tag('linked_in.jpg', :width => 28, :height => 25), "https://www.linkedin.com/in/reecevancleve" %>
