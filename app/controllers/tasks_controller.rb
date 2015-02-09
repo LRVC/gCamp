@@ -32,7 +32,7 @@ class TasksController<ApplicationController
     @task = Task.find(params[:id])
 
     if  @task.update(tasks_params)
-        redirect_to task_path
+        redirect_to task_path, notice: 'Task was succesfully updated'
     else
         render :edit
     end

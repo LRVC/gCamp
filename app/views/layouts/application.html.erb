@@ -17,9 +17,10 @@
   </nav>
 
   <div class= "container">
-
-    <p><% if notice %></p>
-        <%= notice %><br>
+        <% if notice %>
+        <div class= "alert alert-success">
+          <%= notice %>
+        </div>
        <% end %>
   </div>
 
