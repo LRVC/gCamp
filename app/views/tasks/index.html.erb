@@ -9,25 +9,22 @@
 
 
 
-  <% @task.each do |task| %>
-
-    <table class= "table">
-      <thead>
-        <th>Description</th>
-      </thead>
-        <tr>
+  <table class= "table">
+    <thead>
+      <tr>
+        <th> Description </th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @task.each do |task| %>
+          <tr>
             <td><%= link_to task.description, task_path(task) %>
-              <div class= "pull-right">
+              <div class="pull-right">
                 <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
                 <%= link_to 'Delete', task_path(task), method: :delete, class: "btn btn-danger" %>
               </div>
-            </td>
-        </tr>
-    </table>
-
-  <% end %>
-
-  <%= link_to 'New Task', new_task_path %>
-
+      <% end %>
+    </tbody>
+  </table>
 
 </div>
