@@ -33,7 +33,7 @@
       <% end %>
 
       <% if task.due_date %>
-        <td> <%= task.due_date.strftime("%m%d%y")%> </td>
+        <td> <%= task.due_date.strftime("%m/%d/%y")%> </td>
       <% end %>
 
       <td class="pull-right">
@@ -44,7 +44,7 @@
     </tr>
 
     <% end %>
-    
+
   </table>
 
 </div>
