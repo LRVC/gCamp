@@ -18,11 +18,15 @@
     <tbody>
         <% @task.each do |task| %>
           <tr>
-            <td><%= link_to task.description, task_path(task) %>
-              <div class="pull-right">
-                <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
-                <%= link_to 'Delete', task_path(task), method: :delete, class: "btn btn-danger" %>
-              </div>
+            <% if task[:completed] %>
+              <td><strike><%= link_to task.description, task_path(task) %></strike>
+            <% else %>
+              <td><%= link_to task.description, task_path(task) %>
+            <% end %>
+                <div class="pull-right">
+                  <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
+                  <%= link_to 'Delete', task_path(task), method: :delete, class: "btn btn-danger" %>
+                </div>
       <% end %>
     </tbody>
   </table>
