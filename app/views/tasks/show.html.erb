@@ -5,9 +5,9 @@
     </div>
 
 
-      <% if @task[:completed] %>
+      <% if @task.completed %>
         <h3>
-          <strike><%= @task.description %><strike>
+          <strike><%= @task.description %></strike>
         </h3>
       <% else %>
         <h3>
@@ -23,5 +23,9 @@
       <li><%= link_to 'Tasks', tasks_path %></li>
       <li><%= @task.description %></li>
     </ol>
+  </div>
+
+  <div>
+    <strong>Due Date: </strong><%= @task.due_date %>
   </div>
 </div>
