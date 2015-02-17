@@ -20,8 +20,7 @@
 
       <tr>
         <td>
-            <%= user.firstname %>
-            <%= user.lastname %>
+            <%= link_to user.firstname + ' ' + user.lastname , user_path(user) %>
         </td>
 
         <td>
