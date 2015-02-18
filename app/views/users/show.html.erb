@@ -11,15 +11,25 @@
     </div>
 
   <div class="row">
-    <ol class="breadcrumb">
-      <li><%= link_to 'Users', users_path %></li>
-      <li><%= @user.firstname + ' ' + @user.lastname %></li>
-    </ol>
+    <div class= "col-sm-12">
+      <ol class="breadcrumb">
+        <li><%= link_to 'Users', users_path %></li>
+        <li><%= @user.firstname + ' ' + @user.lastname %></li>
+      </ol>
+    </div>
   </div>
 
-  <div>
+  <dl class="dl-horizontal">
+    <dt>First Name:
+      <dd><%= @user.firstname %> </dd>
+    </dt>
+    <dt>Last Name:
+      <dd><%= @user.lastname %></dd>
+    </dt>
+    <dt>Email:
+      <dd><%= mail_to @user.email %></dd>
+    </dt>
 
-    <p>Name: <%= @user.firstname + ' ' + @user.lastname %></p>
-    <p>Email: <%= @user.email %> </p>
+  </dl>
 
-</div>
+  </div>
