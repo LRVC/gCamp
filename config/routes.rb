@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'projects/index'
+
   root 'welcome#index'
 
   get '/terms', to: 'terms#index'
@@ -11,5 +13,6 @@ Rails.application.routes.draw do
 
   resources :tasks
   resources :users
+  resources :projects
 
 end
