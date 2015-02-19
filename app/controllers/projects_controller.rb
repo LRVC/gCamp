@@ -10,26 +10,34 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(projects_params)
     if @project.save
-      redirect_to projects_path, notice: "Project was created successfully"
+      redirect_to project_path(@project), notice: "Project was created successfully"
     else
       render :new
     end
   end
 
   def show
-
+    @project = Project.find(params[:id])
   end
 
   def edit
-
+    @project = Project.find(params[:id])
   end
 
   def update
-
+    @project = Project.find(params[:id])
+    if @project.update(projects_params)
+      redirect_to projects_path, notice: "Project was updated successfully"
+    else
+      render :edit
+    end
   end
 
   def destroy
-
+    @project = Project.find(params[:id])
+    if @project.destroy
+      redirect_to projects_path, notice: "Project was deleted successfully"
+    end
   end
 
   private
