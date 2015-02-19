@@ -1,14 +1,19 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.new
+    @projects = Project.all
   end
 
   def new
-
+    @project = Project.new
   end
 
   def create
-
+    @project = Project.new(projects_params)
+    if @project.save
+      redirect_to projects_path, notice: "Project was created successfully"
+    else
+      render :new
+    end
   end
 
   def show
@@ -25,5 +30,11 @@ class ProjectsController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def projects_params
+    params.require(:project).permit(:name)
   end
 end
