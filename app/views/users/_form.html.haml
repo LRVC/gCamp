@@ -1,0 +1,24 @@
+.container
+  = form_for(@user, html: {class: "form-horizontal"}) do |f|
+    .form-group
+      %label.col-sm-2.control-label First Name
+      .col-sm-6
+        = f.text_field :firstname, class: "form-control"
+    .form-group
+      %label.col-sm-2.control-label Last Name
+      .col-sm-6
+        = f.text_field :lastname, class: "form-control"
+    .form-group
+      %label.col-sm-2.control-label{:for => "inputEmail3"} Email
+      .col-sm-6
+        = f.email_field :email, class: "form-control"
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit class: "btn btn-primary"
+        = link_to 'Cancel', users_path, class: "btn btn-default"
+    .form-group
+      .col-sm-offset-2.col-sm-6
+        - if @user.id
+          .well
+            .text-center
+              = link_to 'Delete', user_path(@user), method: :delete, class: "btn btn-danger"

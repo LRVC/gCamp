@@ -1,0 +1,9 @@
+.container
+  .page-header
+    %h3
+      New Task
+      %h3
+  %ol.breadcrumb
+    %li= link_to 'Tasks', tasks_path
+    %li New Task
+  = render "form"

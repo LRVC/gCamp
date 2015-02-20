@@ -1,0 +1,13 @@
+.container
+  .page-header
+    .pull-right
+      = link_to 'New Project', new_project_path, class: "btn btn-info"
+    %h3 Projects
+  %table.table
+    %thead
+      %tr
+        %th Name
+    - @projects.each do |project|
+      %tr
+        %td
+          = link_to project.name, project_path(project)

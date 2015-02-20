@@ -1,0 +1,10 @@
+.container
+  .page-header
+    %h3
+      Edit Task
+      %h3
+  %ol.breadcrumb
+    %li= link_to 'Tasks', tasks_path
+    %li= link_to @task.description, task_path(@task)
+    %li Edit Task
+  = render "form"
