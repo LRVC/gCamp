@@ -3,10 +3,4 @@
     %h1
       New Project
       %h1
-    - @project.errors.any?
-      - if @project.errors.full_messages.each do |msg|
-        .alert.alert-danger
-          %h1 #{pluralize((@project.errors.size),'error')} prohibited this form from being saved:
-          %ul
-            %li= msg
   = render "form"

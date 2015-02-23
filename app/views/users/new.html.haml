@@ -1,12 +1,4 @@
 .container
   .page-header
-    %h3
-      New User
-      %h3
-      -if @user.errors.any?
-        .alert.alert-danger
-          %h1 #{pluralize((@user.errors.size),'error')} prohibited this form from being saved:
-          - @user.errors.full_messages.each do |msg|
-            %ul
-              %li= msg
-    = render "form"
+    %h3 New User
+  = render "form"
