@@ -1,0 +1,6 @@
+-if error.errors.any?
+  .alert.alert-danger.col-sm6
+    %h1 #{pluralize((error.errors.size),'error')} prohibited this form from being saved:
+    - error.errors.full_messages.each do |msg|
+      %ul
+        %li= msg
