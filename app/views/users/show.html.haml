@@ -3,15 +3,15 @@
     .pull-right
       = link_to 'Edit', edit_user_path(@user), class:"btn btn-info"
     %div
-      %h3= @user.firstname + ' ' + @user.lastname
+      %h3= @user.first_name + ' ' + @user.last_name
   %dl.dl-horizontal
     %dt
       First Name:
       %dd
-        = @user.firstname
+        = @user.first_name
     %dt
       Last Name:
-      %dd= @user.lastname
+      %dd= @user.last_name
     %dt
       Email:
       %dd= mail_to @user.email
