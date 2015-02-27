@@ -3,12 +3,12 @@
     .pull-right
       = link_to 'Edit', edit_task_path(@task), class:"btn btn-info"
     - if @task.completed
-      %h3
+      %h1
         %strike= @task.description
     - else
-      %h3
+      %h1
         = @task.description
-        %h3
+        %h1
   .row
     .col-sm-12
       %ol.breadcrumb
