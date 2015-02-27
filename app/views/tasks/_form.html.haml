@@ -2,7 +2,7 @@
   = form_for(@task, html: {class: "form-horizontal"}) do |f|
     .form-group
       .col-sm-offset-2.col-sm-8
-        = render partial: 'shared/form', locals: { error: @task}
+        = render partial: 'shared/errors', locals: { error: @task}
     .form-group
       %label.col-sm-2.control-label Description
       .col-sm-6
