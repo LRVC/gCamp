@@ -12,7 +12,7 @@ feature 'Tasks CRUD' do
     click_link 'New Task'
 
     expect(page).to have_content "New Task"
-    fill_in :task_description, with: "Run errands"
+      fill_in :task_description, with: "Anything you want"
     fill_in :task_due_date, with: "02/03/2015"
     click_button 'Create Task'
   end
