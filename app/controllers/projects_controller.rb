@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action :check_current_user
+
   def index
     @projects = Project.all
   end
@@ -44,5 +46,13 @@ class ProjectsController < ApplicationController
 
   def projects_params
     params.require(:project).permit(:name)
+  end
+
+  def check_current_user
+    if current_user
+
+    else
+      redirect_to sign_in_path, notice: "You must sign in"
+    end
   end
 end

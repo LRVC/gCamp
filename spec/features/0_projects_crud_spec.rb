@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Projects CRUD' do
   scenario 'Users can see project names from index page and create new users from link' do
+    sign_in_user
     errands = Project.new(name: "Errands")
     errands.save!
 
@@ -23,6 +24,7 @@ feature 'Projects CRUD' do
   end
 
   scenario 'User can edit project' do
+    sign_in_user
     errands = Project.new(name: "Errands")
     errands.save!
 
@@ -36,6 +38,7 @@ feature 'Projects CRUD' do
   end
 
   scenario 'Validates that fields are not blank when creating new user' do
+    sign_in_user
     visit new_project_path
 
     click_button "Create Project"

@@ -1,4 +1,5 @@
 class TasksController<ApplicationController
+  before_action :check_current_user
 
   def index
     @task = Task.all
@@ -51,4 +52,11 @@ class TasksController<ApplicationController
     params.require(:task).permit(:description, :completed, :due_date)
   end
 
+  def check_current_user
+    if current_user
+
+    else
+      redirect_to sign_in_path, notice: "You must sign in"
+    end
+  end
 end

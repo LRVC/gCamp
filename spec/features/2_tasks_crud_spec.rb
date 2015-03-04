@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Tasks CRUD' do
   scenario 'Users can see tasks list with description and due date and create new task' do
+    sign_in_user
     errand = Task.new(description: "errands", due_date: Date.today)
     errand.save!
 
@@ -18,6 +19,7 @@ feature 'Tasks CRUD' do
   end
 
   scenario 'User can edit tasks' do
+    sign_in_user
     errand = Task.new(description: "errands", due_date: Date.today)
     errand.save!
 
@@ -31,6 +33,7 @@ feature 'Tasks CRUD' do
   end
 
   scenario 'display error messages and validate task fields' do
+    sign_in_user
     visit new_task_path
 
     click_button 'Create Task'

@@ -17,7 +17,8 @@ feature 'User can log in and out' do
     click_button 'Sign Up'
 
     expect(page).to have_content 'John Denver'
-
   end
+
+  
 
 end

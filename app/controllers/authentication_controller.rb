@@ -10,12 +10,12 @@ class AuthenticationController < ApplicationController
       redirect_to root_path, notice: "You have signed in successfully"
     else
       redirect_to root_path
-      flash[:notice] = "Something went wrong"
+      flash[:notice] = "Email/Password combination is invalid"
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path
+    redirect_to root_path, notice: "You have successfully logged out"
   end
 end
