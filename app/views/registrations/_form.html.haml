@@ -5,7 +5,8 @@
     .form-group
       -if @user.errors.any?
         - @user.errors.full_messages.each do |msg|
-          %p.text-danger= msg
+          %strong
+            %p.text-danger= msg
 
     = form_for(@user, url: sign_up_path, html: {class: "form"}) do |f|
 

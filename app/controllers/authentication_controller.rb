@@ -9,8 +9,8 @@ class AuthenticationController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path, notice: "You have signed in successfully"
     else
-      redirect_to root_path
-      flash[:notice] = "Email/Password combination is invalid"
+      @sign_in_error = "Email/Password combination is invalid"
+      render :new
     end
   end
 
