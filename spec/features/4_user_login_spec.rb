@@ -31,4 +31,12 @@ feature 'User can log in and out' do
     expect(page).to have_content 'John Denver'
   end
 
+  scenario 'User can log out' do
+    sign_in_user
+
+    click_link 'Sign Out'
+
+    expect(page).to have_content 'Sign In'
+  end
+
 end
