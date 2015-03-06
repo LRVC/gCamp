@@ -7,7 +7,10 @@
     %thead
       %tr
         %th Name
+        %th Tasks
     - @projects.each do |project|
       %tr
         %td
           = link_to project.name, project_path(project)
+        %td
+          = link_to project.tasks.count, project_tasks_path(project)

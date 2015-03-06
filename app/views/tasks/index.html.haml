@@ -2,7 +2,11 @@
   .page-header
     .pull-right
       = link_to 'New Task', new_project_task_path, class: "btn btn-info"
-    %h1 Tasks
+    %h1 Tasks for #{@project.name}
+  %ol.breadcrumb
+    %li= link_to 'Projects', projects_path
+    %li= link_to @project.name, project_path(@project)
+    %li Tasks
   %table.table
     %thead
       %th Description
@@ -12,9 +16,9 @@
         %tr
           %td
             - if task.completed
-              %strike= link_to task.description, project_tasks_path(task)
+              %strike= link_to task.description, project_task_path(@project, task)
             - else
-              = link_to task.description, project_tasks_path(task)
+              = link_to task.description, project_task_path(@project, task)
           %td
             - if task.due_date
               = task.due_date.strftime("%m/%d/%y")
