@@ -1,8 +1,11 @@
 class TasksController<ApplicationController
   before_action :check_current_user
+  before_action do
+    @project = Project.find(params[:project_id])
+  end
 
   def index
-    @task = Task.all
+    @tasks = @project.tasks
   end
 
   def new
@@ -10,9 +13,9 @@ class TasksController<ApplicationController
   end
 
   def create
-    @task = Task.new(tasks_params)
+    @task = @project.tasks.new(tasks_params)
      if @task.save
-       redirect_to task_path(@task), notice: 'Task was successfully created.'
+       redirect_to project_tasks_path(@task), notice: 'Task was successfully created.'
      else
        render :new
      end
@@ -33,7 +36,7 @@ class TasksController<ApplicationController
     @task = Task.find(params[:id])
 
     if  @task.update(tasks_params)
-        redirect_to task_path, notice: 'Task was successfully updated'
+        redirect_to project_task_path, notice: 'Task was successfully updated'
     else
         render :edit
     end
@@ -43,7 +46,7 @@ class TasksController<ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to tasks_path
+    redirect_to project_tasks_path
   end
 
   private
