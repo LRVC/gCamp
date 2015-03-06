@@ -19,6 +19,16 @@ feature 'User can log in and out' do
     expect(page).to have_content 'John Denver'
   end
 
-  
+  scenario 'User can sign in with valid data' do
+    person = User.create(first_name: 'John',last_name: 'Denver', email: 'john@denver.com', password: 'password')
+    visit sign_in_path
+
+    fill_in :email, with: 'john@denver.com'
+    fill_in :password, with: 'password'
+    click_button 'Sign In'
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'John Denver'
+  end
 
 end
