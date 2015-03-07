@@ -7,5 +7,6 @@
       = @project.name
   %ol.breadcrumb
     %li= link_to 'Projects', projects_path
-    %li= @project.name 
+    %li= @project.name
   = link_to pluralize((@project.tasks.count),'task'), project_tasks_path(@project)
+  %br= link_to pluralize((@project.memberships.count), 'member'), project_memberships_path(@project)
