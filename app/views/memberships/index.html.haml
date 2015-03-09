@@ -5,8 +5,14 @@
     %li= link_to 'Projects', projects_path
     %li= link_to @project.name, project_path(@project)
     %li Memberships
-  = render 'form'
   %row
+    -if @membership.errors.any?
+      .alert.alert-danger.col-md-7
+        %h3 #{pluralize((@membership.errors.size),'error')} prohibited this form from being saved:
+        - @membership.errors.full_messages.each do |msg|
+          %ul
+            %li= msg
+    = render 'form'
     .col-md-7
       %table.table
         %tbody
