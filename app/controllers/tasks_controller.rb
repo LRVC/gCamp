@@ -1,4 +1,4 @@
-class TasksController<ApplicationController
+class TasksController < ApplicationController
   before_action :check_current_user
   before_action do
     @project = Project.find(params[:project_id])
@@ -23,9 +23,9 @@ class TasksController<ApplicationController
   end
 
   def show
-
     @task = Task.find(params[:id])
-    task = @task
+    @comment = Comment.new
+    @comments = Comment.all
   end
 
   def edit
