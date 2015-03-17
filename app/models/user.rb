@@ -5,10 +5,14 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :projects, through: :memberships
 
   def full_name
     first_name.capitalize + " " + last_name.capitalize
+  end
+
+  def set_user_id_nil_on_comments
+    self.comments.update_all(user_id: nil)
   end
 end
