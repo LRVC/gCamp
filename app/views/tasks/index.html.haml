@@ -14,11 +14,12 @@
     %tbody
       - @project.tasks.each do |task|
         %tr
-          %td
+          %td.col-md-3
             - if task.completed
               %strike= link_to task.description, project_task_path(@project, task)
             - else
               = link_to task.description, project_task_path(@project, task)
+            .badge= task.comments.count
           %td
             - if task.due_date
               = task.due_date.strftime("%m/%d/%y")

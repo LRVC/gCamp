@@ -21,11 +21,12 @@ Rails.application.routes.draw do
   get 'sign-out', to: 'authentication#destroy'
 
   resources :users
+  
   resources :projects do
     resources :tasks do
-      resources :comments
+      resources :comments, only: [:create]
     end
-    resources :memberships
+    resources :memberships, only: [:index, :create, :update, :destroy]
   end
 
 

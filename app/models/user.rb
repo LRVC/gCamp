@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :memberships, dependent: :destroy
   has_many :projects, through: :memberships
+  has_many :comments
 
   def full_name
     first_name.capitalize + " " + last_name.capitalize
