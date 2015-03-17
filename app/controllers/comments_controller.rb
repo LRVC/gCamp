@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @task = Task.find(params[:task_id])
     @user = User.find(current_user)
   end
-  
+
     def create
       @comment = @task.comments.new(comment_params)
       @comment.update_attributes(user_id: @user.id)
@@ -19,6 +19,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:description)
   end
 end
