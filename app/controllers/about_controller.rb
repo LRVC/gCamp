@@ -1,4 +1,6 @@
 class AboutController < ApplicationController
+  
+
   def index
     @project = Project.all.count
     @task = Task.all.count

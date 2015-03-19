@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  layout "user_layout"
+
   def index
     @quotesArray = [
         {author: "-Cayla Hayes", quote: "gCamp has changed my life! It's the best tool I've ever used."},
