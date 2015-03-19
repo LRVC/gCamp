@@ -1,12 +1,19 @@
 %nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
   .container
     .navbar-header
-      %a.navbar-brand{:href => "/"} gCamp
-    - if current_user
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to current_user.first_name + ' ' + current_user.last_name, user_path(current_user)
-        %li= link_to 'Sign Out', sign_out_path
-    -else
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to 'Sign Up', sign_up_path
-        %li= link_to 'Sign In', sign_in_path
+      %a.navbar-brand{:href => "/"} gCamp Private Mode
+    %ul.nav.navbar-nav.navbar-left
+      %li.dropdown
+        %a.dropdown-toggle{:href => "#", "role" => "button", "data-toggle" => "dropdown", "data-target" => "#"}
+          Projects
+          %b.caret
+        %ul.dropdown-menu{"role" => "menu"}
+          -@current_user.projects.each do |project|
+            %li= link_to "#{project.name}", project_path(project)
+          %li.divider
+            %li= link_to 'New Project', new_project_path
+    %ul.nav.navbar-nav.navbar-left
+      %li= link_to 'Users', users_path
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to current_user.first_name + ' ' + current_user.last_name, user_path(current_user)
+      %li= link_to 'Sign Out', sign_out_path

@@ -1,5 +1,4 @@
-class WelcomeController < ApplicationController
-  layout "user_layout"
+class WelcomeController < PublicController
 
   def index
     @quotesArray = [

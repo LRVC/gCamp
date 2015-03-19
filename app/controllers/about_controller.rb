@@ -1,5 +1,5 @@
-class AboutController < ApplicationController
-  
+class AboutController < PublicController
+
 
   def index
     @project = Project.all.count

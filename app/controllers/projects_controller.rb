@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  before_action :layout_find
   before_action :check_current_user
 
   def index
