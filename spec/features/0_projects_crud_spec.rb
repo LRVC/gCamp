@@ -11,9 +11,7 @@ feature 'Projects CRUD' do
     expect(page).to have_content "Projects"
     expect(page).to have_content "Errands"
 
-    click_link "New Project"
-
-    expect(current_path).to eq new_project_path
+    visit new_project_path
 
     expect(page).to have_content "New Project"
 

@@ -58,7 +58,7 @@ class TasksController < ApplicationController
 
   def check_current_user
     if current_user
-
+      @user = current_user
     else
       redirect_to sign_in_path
       flash[:alert] = "You must sign in"

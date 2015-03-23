@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :check_current_user
+  before_action :find_project, only: [:show, :edit, :update, :destroy]
+  before_action :check_member, only: [:show, :edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -20,15 +22,14 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+
   end
 
   def edit
-    @project = Project.find(params[:id])
+
   end
 
   def update
-    @project = Project.find(params[:id])
     if @project.update(projects_params)
       redirect_to project_path(@project), notice: "Project was updated successfully"
     else
@@ -37,7 +38,6 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
     if @project.destroy
       redirect_to projects_path, notice: "Project was deleted successfully"
     end
@@ -49,11 +49,23 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(:name)
   end
 
+  def find_project
+    @project = Project.find(params[:id])
+  end
+
   def check_current_user
     if current_user
-
+      @user = current_user
     else
       redirect_to sign_in_path, notice: "You must sign in"
     end
   end
+
+  def check_member
+    if current_user.memberships.find_by(project_id: @project.id) == nil
+      flash[:alert] = 'You do not have access to that project'
+      redirect_to projects_path
+    end
+  end
+
 end
