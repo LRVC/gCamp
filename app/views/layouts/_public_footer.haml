@@ -1,0 +1,20 @@
+.container
+  %hr
+  %footer
+    .row
+      .col-md-4
+        = link_to 'Terms', terms_path
+        |
+        \#{link_to 'About', about_path}
+        |
+        \#{link_to 'FAQ', faq_path}
+        -if current_user
+          |
+          \#{link_to 'Users', users_path}
+          |
+          \#{link_to 'Projects', projects_path}
+      .col-md-8.text-right
+        = link_to image_tag('linked_in.jpg', :width => 28, :height => 25), "https://www.linkedin.com/in/reecevancleve"
+        = link_to image_tag('GitHub.jpg', :width => 25, :height => 25), "https://github.com/LRVC"
+        = link_to image_tag('Twitter.jpg', :width => 25, :height => 25), "https://twitter.com/RV_C"
+        = link_to image_tag('Galvanize.jpg', :width => 22, :height => 25), "https://students.gschool.it/cohorts/8/students/290"

@@ -1,6 +1,5 @@
 class AboutController < PublicController
 
-
   def index
     @project = Project.all.count
     @task = Task.all.count
@@ -8,4 +7,5 @@ class AboutController < PublicController
     @user = User.all.count
     @comment = Comment.all.count
   end
+
 end
