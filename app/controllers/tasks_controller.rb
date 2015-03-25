@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   before_action do
     @project = Project.find(params[:project_id])
   end
+  before_action :check_member, only: [:show, :edit, :update, :destroy]
 
   def index
     @tasks = @project.tasks
@@ -62,6 +63,13 @@ class TasksController < ApplicationController
     else
       redirect_to sign_in_path
       flash[:alert] = "You must sign in"
+    end
+  end
+
+  def check_member
+    if current_user.memberships.find_by(project_id: @project.id) == nil
+      flash[:alert] = 'You do not have access to that project'
+      redirect_to projects_path
     end
   end
 end

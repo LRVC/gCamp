@@ -2,6 +2,8 @@ class ProjectsController < ApplicationController
   before_action :check_current_user
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   before_action :check_member, only: [:show, :edit, :update, :destroy]
+  before_action :find_member, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @projects = Project.all
@@ -68,4 +70,13 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def find_member
+    @current_membership = current_user.memberships.find_by(project_id: @project.id)
+    if @current_membership.role == "Owner"
+        
+    else
+      flash[:alert] = 'You do not have access'
+      render :show
+    end
+  end
 end

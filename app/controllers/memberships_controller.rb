@@ -1,12 +1,16 @@
 class MembershipsController < ApplicationController
-  
+
   before_action :check_current_user
   before_action do
     @project = Project.find(params[:project_id])
   end
+  before_action :check_member
+  before_action :find_member, only: [:edit, :update, :destroy]
+  before_action :count_owners, only: [:index]
 
   def index
     @membership = @project.memberships.new
+    @current_membership = current_user.memberships.find_by(project_id: @project.id)
   end
 
   def create
@@ -34,7 +38,7 @@ class MembershipsController < ApplicationController
   def destroy
     membership = Membership.find(params[:id])
     membership.destroy
-    redirect_to project_memberships_path(@project), notice: "#{membership.user.full_name} was deleted successfully"
+    redirect_to project_path(@project), notice: "#{membership.user.full_name} successfully removed"
   end
 
   private
@@ -44,10 +48,33 @@ class MembershipsController < ApplicationController
 
   def check_current_user
     if current_user
-
+      @user = current_user
     else
       redirect_to sign_in_path
       flash[:alert] = "You must sign in"
     end
+  end
+
+  def check_member
+    if current_user.memberships.find_by(project_id: @project.id) == nil
+      flash[:alert] = 'You do not have access to that project'
+      redirect_to projects_path
+    end
+  end
+
+  def find_member
+    @current_membership = current_user.memberships.find_by(project_id: @project.id)
+      if @current_membership.role == "Owner"
+
+      else
+        flash[:alert] = 'You do not have access'
+        redirect_to project_path(@project)
+    end
+  end
+
+  def count_owners
+    owner_array = []
+    owner_array << @project.memberships.find_by(role: "Owner")
+    @owner_num = owner_array.count
   end
 end
