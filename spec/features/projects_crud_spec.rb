@@ -3,7 +3,8 @@ require 'rails_helper'
 feature 'Projects CRUD' do
   scenario 'Users can see project names from index page and create new users from link' do
     sign_in_user
-    errands = Project.new(name: "Errands")
+    Membership.new(role: "Owner", user_id: 1, project_id: 1)
+    errands = Project.new(id: 1, name: "Errands")
     errands.save!
 
     visit projects_path

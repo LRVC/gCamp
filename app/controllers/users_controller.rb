@@ -1,5 +1,5 @@
 class UsersController<ApplicationController
-  
+
   before_action :check_current_user
 
   def index
@@ -28,6 +28,9 @@ class UsersController<ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    unless current_user.id == @user.id
+      raise AccessDenied
+    end
   end
 
   def update
@@ -44,6 +47,7 @@ class UsersController<ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+    session[:user_id] = nil
     redirect_to users_path, notice: 'User was successfully deleted'
   end
 

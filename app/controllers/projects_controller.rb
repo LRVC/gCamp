@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
   def find_member
     @current_membership = current_user.memberships.find_by(project_id: @project.id)
     if @current_membership.role == "Owner"
-        
+
     else
       flash[:alert] = 'You do not have access'
       render :show
