@@ -54,14 +54,14 @@ class UsersController<ApplicationController
   private
 
   def users_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :admin)
   end
 
   def check_current_user
     if current_user
 
     else
-      redirect_to sign_in_path, notice: "You must sign in"
+      redirect_to sign_in_path, alert: "You must sign in"
     end
   end
 end

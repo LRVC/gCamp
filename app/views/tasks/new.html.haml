@@ -4,6 +4,7 @@
       New Task
       %h3
   %ol.breadcrumb
+    %li= link_to @project.name, project_path(@project)
     %li= link_to 'Tasks', project_tasks_path
     %li New Task
   = render "form"

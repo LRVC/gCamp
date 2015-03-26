@@ -61,8 +61,7 @@ class TasksController < ApplicationController
     if current_user
       @user = current_user
     else
-      redirect_to sign_in_path
-      flash[:alert] = "You must sign in"
+      redirect_to sign_in_path, alert: "You must sign in"
     end
   end
 

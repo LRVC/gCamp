@@ -24,6 +24,10 @@
       .col-sm-6
         = f.password_field :password_confirmation, class: "form-control"
     .form-group
+      %label.col-sm-2.control-label Admin
+      .col-sm-6
+        = f.check_box :admin, class: "form-control"
+    .form-group
       .col-sm-offset-2.col-sm-10
         = f.submit class: "btn btn-primary"
         = link_to 'Cancel', users_path, class: "btn btn-default"

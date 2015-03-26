@@ -3,14 +3,8 @@ require 'rails_helper'
 feature 'Projects CRUD' do
   scenario 'Users can see project names from index page and create new users from link' do
     sign_in_user
-    Membership.new(role: "Owner", user_id: 1, project_id: 1)
     errands = Project.new(id: 1, name: "Errands")
     errands.save!
-
-    visit projects_path
-
-    expect(page).to have_content "Projects"
-    expect(page).to have_content "Errands"
 
     visit new_project_path
 
@@ -22,7 +16,7 @@ feature 'Projects CRUD' do
     expect(page).to have_content "Project was created successfully"
   end
 
-  scenario 'User can edit project' do
+  scenario 'User can edit a project they own' do
     sign_in_user
     errands = Project.new(name: "Errands")
     errands.save!
