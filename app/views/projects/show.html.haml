@@ -1,7 +1,7 @@
 .container
   .page-header
     .pull-right
-      -unless @current_membership.role == "Member"
+      -unless @current_membership.role == "Member" || @user.admin == false
         = link_to 'Edit', edit_project_path(@project), class: "btn btn-primary"
     %h1
       = @project.name
@@ -11,7 +11,7 @@
     = link_to pluralize((@project.tasks.count),'task'), project_tasks_path(@project)
   %br= link_to pluralize((@project.memberships.count), 'member'), project_memberships_path(@project)
 
-  -unless @current_membership.role == "Member"
+  -unless @current_membership.role == "Member" || @user.admin == false
     .well
       %h4 Delete Project
       %p="Deleting this project will also delete #{pluralize(@project.memberships.count, 'membership')}, #{pluralize(@project.tasks.count, 'task')} and associated comments."
