@@ -59,6 +59,7 @@ class ProjectsController < ApplicationController
     if current_user
       @user = current_user
     else
+      session[:redirect_to] = request.fullpath
       redirect_to sign_in_path, alert: "You must sign in"
     end
   end

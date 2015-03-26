@@ -9,7 +9,7 @@ class AuthenticationController < PublicController
     user = User.find_by(email: (params[:email]))
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to projects_path, notice: "You have signed in successfully"
+      redirect_to session[:redirect_to], notice: "You have signed in successfully"
     else
       @sign_in_error = "Email/Password combination is invalid"
       render :new

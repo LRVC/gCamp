@@ -1,0 +1,15 @@
+.p404
+  .face
+    %span.eyes :
+    %span.mouth (
+  %p.message
+    Oops, there is nothing in
+    = succeed "..." do
+      %span /itsyourbadimflawless
+    Want to go to the
+    = succeed "?" do
+      %a{:href => "#homepage"} homepage
+  .search-box
+    %form{:action => ""}
+      %input{:placeholder => "You can also search for the needle!", :type => "text"}
+        %i.fa.fa-search
