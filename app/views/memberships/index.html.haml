@@ -13,7 +13,7 @@
         - @membership.errors.full_messages.each do |msg|
           %ul
             %li= msg
-  -if @current_membership.role == "Owner"
+  -if @current_membership.role == "Owner" || current_user.admin == true 
     = render 'form'
     .col-md-7
       %table.table

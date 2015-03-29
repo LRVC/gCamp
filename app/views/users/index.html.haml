@@ -13,9 +13,11 @@
         %td
           = link_to user.first_name + ' ' + user.last_name , user_path(user)
         %td
-          -if current_user.id == user.id
-            = mail_to user.email
-            %td.text-right
-              = link_to 'Edit', edit_user_path(user)
-          -else
-            %td
+          -user.memberships.each do |membership|
+            -current_user.memberships.each do |user_membership|
+              -if current_user.id == user.id || membership.id == user_membership.id
+                = mail_to user.email
+                %td.text-right
+                  = link_to 'Edit', edit_user_path(user)
+              -else
+                %td
