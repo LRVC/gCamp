@@ -7,7 +7,7 @@ class MembershipsController < ApplicationController
   before_action :check_member
   before_action :find_member, only: [:edit, :update ]
   before_action :count_owners
-  before_action :verify_min_one_owner, only: [:update, :destroy]
+  before_action :verify_min_one_owner_destroy, only: [:destroy]
 
   def index
     @membership = @project.memberships.new
@@ -83,9 +83,11 @@ class MembershipsController < ApplicationController
     @owner_num = owner_array.count
   end
 
-  def verify_min_one_owner
-   if @current_membership.role == "Owner" && @owner_num <= 1
-     redirect_to project_memberships_path(@current_membership.project_id), alert: "Projects must have at least one owner"
-   end
- end
+  def verify_min_one_owner_destroy
+    if @current_membership.role == "Owner" && @owner_num <= 1
+      redirect_to project_memberships_path(@current_membership.project_id), alert: "Projects must have at least one owner"
+    end
+  end
+
+
 end
