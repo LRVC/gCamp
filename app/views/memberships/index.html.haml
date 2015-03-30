@@ -1,7 +1,6 @@
 .container
   .page-header
     %h3= @project.name + ': Manage Members'
-    %h3= @owner_num
   %ol.breadcrumb
     %li= link_to 'Projects', projects_path
     %li= link_to @project.name, project_path(@project)
@@ -13,7 +12,7 @@
         - @membership.errors.full_messages.each do |msg|
           %ul
             %li= msg
-  -if @current_membership.role == "Owner" || current_user.admin == true 
+  -if @current_membership.role == "Owner" || current_user.admin
     = render 'form'
     .col-md-7
       %table.table

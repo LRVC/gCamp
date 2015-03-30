@@ -11,7 +11,7 @@
   %ol.breadcrumb
     %li= link_to 'Projects', projects_path
     %li= @project.name
-    %li= link_to pluralize((@project.tasks.count),'task'), project_tasks_path(@project)
+  %li= link_to pluralize((@project.tasks.count),'task'), project_tasks_path(@project)
   %br= link_to pluralize((@project.memberships.count), 'member'), project_memberships_path(@project)
 
   -if !(current_user.admin)
