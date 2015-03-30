@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   before_action :check_member, only: [:show, :edit, :update, :destroy]
   before_action :find_member, only: [:show, :edit, :update, :destroy]
-  before_action :check_admin
 
 
   def index
@@ -86,9 +85,4 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def check_admin
-    if !(current_user.admin)
-      flash[:alert] = 'You do not have acess'
-    end
-  end
 end
