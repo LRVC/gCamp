@@ -7,6 +7,7 @@ class MembershipsController < ApplicationController
   before_action :check_member
   before_action :find_member, only: [:edit, :update ]
   before_action :count_owners
+  before_action :verify_min_one_owner, only: [:update, :destroy]
 
   def index
     @membership = @project.memberships.new
@@ -30,12 +31,10 @@ class MembershipsController < ApplicationController
 
   def update
     @membership = @project.memberships.find(params[:id])
-    if (@owner_num > 1)
-      if @membership.update(params.require(:membership).permit(:role))
-        redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was updated successfully"
-      end
+    if @membership.update(params.require(:membership).permit(:role))
+      redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was updated successfully"
     else
-        redirect_to project_memberships_path(@project), alert: "Projects must have at least one owner"
+      redirect_to projects_path, notice: "This shit is broken"
     end
   end
 
@@ -81,4 +80,10 @@ class MembershipsController < ApplicationController
     owner_array << @project.memberships.find_by(role: "Owner")
     @owner_num = owner_array.count
   end
+
+  def verify_min_one_owner
+   if @current_membership.role == "Owner" && @owner_num <= 1
+     redirect_to project_memberships_path(@current_membership.project_id), alert: "Projects must have at least one owner"
+   end
+ end
 end

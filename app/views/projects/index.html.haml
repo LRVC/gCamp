@@ -8,7 +8,7 @@
       %tr
         %th Name
         %th Tasks
-    - if @user.admin
+    - if current_user.admin
       - @projects.each do |project|
         %tr
           %td
