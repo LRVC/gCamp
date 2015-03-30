@@ -65,6 +65,7 @@ class ProjectsController < ApplicationController
   end
 
   def check_member
+    @current_membership = current_user.memberships.find_by(project_id: @project.id)
     if !(current_user.memberships.find_by(project_id: @project.id) == nil) || current_user.admin
 
     else
