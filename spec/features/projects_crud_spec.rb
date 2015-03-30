@@ -1,37 +1,41 @@
 require 'rails_helper'
 
 feature 'Projects CRUD' do
-  scenario 'Users can see project names from index page and create new users from link' do
-    sign_in_user
-    errands = Project.new(id: 1, name: "Errands")
-    errands.save!
 
+  before :each do
+    user = User.new(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: true)
+    user.save!
+    visit root_path
+    click_link 'Sign In'
+    fill_in :email, with: 'bob@dole.com'
+    fill_in :password, with: 'bob'
+    click_button 'Sign In'
+    project = Project.create!(name: 'Sunshine')
+    Membership.create!(user_id: user.id, project_id: project.id, role: 'Owner')
+  end
+
+  scenario 'Users can make a new project' do
     visit new_project_path
-
     expect(page).to have_content "New Project"
 
-    fill_in :project_name, with: "Errands"
+    fill_in :project_name, with: "Sunshine"
     click_button "Create Project"
 
     expect(page).to have_content "Project was created successfully"
   end
 
-  scenario 'User can edit a project they own' do
-    sign_in_user
-    errands = Project.new(name: "Errands")
-    errands.save!
+  scenario 'User can edit a project' do
+    visit projects_path
+    within('.table'){ click_on 'Sunshine' }
 
-    visit edit_project_path(errands)
-
-    expect(page).to have_content "Edit Project"
-    fill_in :project_name, with: "Do something"
+    click_link 'Edit'
+    fill_in :project_name, with: "Moonlight"
     click_button "Update Project"
 
     expect(page).to have_content "Project was updated successfully"
   end
 
   scenario 'Validates that fields are not blank when creating new user' do
-    sign_in_user
     visit new_project_path
 
     click_button "Create Project"

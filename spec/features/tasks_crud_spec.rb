@@ -1,20 +1,31 @@
 require 'rails_helper'
 
 feature 'Tasks CRUD' do
-  scenario 'Users can see tasks list with description and due date and create new task' do
-    sign_in_user
-    project = Project.new(name: 'Silly project')
-    project.save!
-    errand = Task.new(description: "errands", due_date: Date.today)
-    errand.save!
+
+  before :each do
+    user = User.new(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: true)
+    user.save!
+    visit root_path
+    click_link 'Sign In'
+    fill_in :email, with: 'bob@dole.com'
+    fill_in :password, with: 'bob'
+    click_button 'Sign In'
+    project = Project.create!(name: 'Sunshine')
+    Membership.create!(user_id: user.id, project_id: project.id, role: 'Owner')
+    task = project.tasks.create(description: "Finish this project", due_date: '2015-04-02')
+
+  end
+
+
+  scenario 'Users can create new task' do
 
     visit projects_path
     expect(page).to have_content 'Tasks'
-    expect(page).to have_content 'Silly project'
+    expect(page).to have_content 'Sunshine'
 
-    click_link 'Silly project'
-    expect(page).to have_content '0 tasks'
-    click_link '0 tasks'
+    within('.table') { click_link 'Sunshine' }
+    expect(page).to have_content '1 task'
+    click_link '1 task'
 
     click_link 'New Task'
     expect(page).to have_content "New Task"
@@ -26,18 +37,12 @@ feature 'Tasks CRUD' do
   end
 
   scenario 'User can edit tasks' do
-    sign_in_user
-    project = Project.new(name: 'Silly project')
-    project.save!
-    errand = Task.new(description: "errands", due_date: Date.today)
-    errand.save!
-
     visit projects_path
-    expect(page).to have_content 'Silly project'
+    expect(page).to have_content 'Sunshine'
 
-    click_link 'Silly project'
-    expect(page).to have_content '0 tasks'
-    click_link '0 tasks'
+    within('.table') { click_link 'Sunshine' }
+    expect(page).to have_content '1 task'
+    click_link '1 task'
 
     click_link 'New Task'
     expect(page).to have_content "New Task"
@@ -45,9 +50,9 @@ feature 'Tasks CRUD' do
     fill_in :task_due_date, with: "02/03/2015"
     click_button 'Create Task'
 
-    click_link 'Edit'
+    within('.table') { click_on 'Anything you want' }
 
-    expect(page).to have_content "Edit Task"
+    click_on 'Edit'
     fill_in :task_description, with: "run errrands"
     fill_in :task_due_date, with: "02/04/2015"
     click_button 'Update Task'
@@ -56,19 +61,14 @@ feature 'Tasks CRUD' do
   end
 
   scenario 'display error messages and validate task fields' do
-    sign_in_user
-    project = Project.new(name: 'Silly project')
-    project.save!
-    errand = Task.new(description: "errands", due_date: Date.today)
-    errand.save!
 
     visit projects_path
     expect(page).to have_content 'Tasks'
-    expect(page).to have_content 'Silly project'
+    expect(page).to have_content 'Sunshine'
 
-    click_link 'Silly project'
-    expect(page).to have_content '0 tasks'
-    click_link '0 tasks'
+    within('.table') { click_link 'Sunshine' }
+    expect(page).to have_content '1 task'
+    click_link '1 task'
 
     click_link 'New Task'
 

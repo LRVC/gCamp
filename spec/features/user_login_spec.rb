@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 feature 'User can log in and out' do
+
+  before :each do
+    user = User.new(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: true)
+    user.save!
+  end
+
   scenario 'sign up link is visible on index and user can sign up after clicking link' do
     visit root_path
 
@@ -20,19 +26,21 @@ feature 'User can log in and out' do
   end
 
   scenario 'User can sign in with valid data' do
-    person = User.create(first_name: 'John',last_name: 'Denver', email: 'john@denver.com', password: 'password')
     visit sign_in_path
 
-    fill_in :email, with: 'john@denver.com'
-    fill_in :password, with: 'password'
+    fill_in :email, with: 'bob@dole.com'
+    fill_in :password, with: 'bob'
     click_button 'Sign In'
 
-    expect(current_path).to eq projects_path
-    expect(page).to have_content 'John Denver'
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Bob Dole'
   end
 
   scenario 'User can log out' do
-    sign_in_user
+    visit sign_in_path
+    fill_in :email, with: 'bob@dole.com'
+    fill_in :password, with: 'bob'
+    click_button 'Sign In'
 
     click_link 'Sign Out'
 

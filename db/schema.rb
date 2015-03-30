@@ -16,12 +16,6 @@ ActiveRecord::Schema.define(version: 20150326042053) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "add_date_to_tasks", force: :cascade do |t|
-    t.datetime "due_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "task_id"

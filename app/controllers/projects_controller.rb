@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   before_action :check_member, only: [:show, :edit, :update, :destroy]
   before_action :find_member, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
 
 
   def index
@@ -65,19 +66,29 @@ class ProjectsController < ApplicationController
   end
 
   def check_member
-    if current_user.memberships.find_by(project_id: @project.id) == nil
+    if !(current_user.memberships.find_by(project_id: @project.id) == nil) || current_user.admin
+
+    else
       flash[:alert] = 'You do not have access to that project'
       redirect_to projects_path
     end
   end
 
   def find_member
-    @current_membership = current_user.memberships.find_by(project_id: @project.id)
-    if @current_membership.role == "Owner" || @user.admin == true
+    if !(current_user.admin)
+      @current_membership = current_user.memberships.find_by(project_id: @project.id)
+      if @current_membership.role == "Owner"
 
-    else
-      flash[:alert] = 'You do not have access'
-      render :show
+      else
+        flash[:alert] = 'You do not have access'
+        render :show
+      end
+    end
+  end
+
+  def check_admin
+    if !(current_user.admin)
+      flash[:alert] = 'You do not have acess'
     end
   end
 end
