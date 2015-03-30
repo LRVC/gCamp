@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action do
     @project = Project.find(params[:project_id])
   end
-  before_action :check_member, only: [:show, :edit, :update, :destroy]
+  before_action :check_member, only: [:index, :show, :edit, :update, :destroy]
 
   def index
     @tasks = @project.tasks
@@ -74,4 +74,5 @@ class TasksController < ApplicationController
       redirect_to projects_path
     end
   end
+
 end
