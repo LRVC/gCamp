@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
   def set_user_id_nil_on_comments
     self.comments.update_all(user_id: nil)
   end
+
+  def project_member_of(user)
+    user.projects.map(&:users).flatten.include?(self)
+  end
 end
