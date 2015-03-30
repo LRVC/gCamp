@@ -28,7 +28,7 @@ class UsersController<ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    unless current_user.id == @user.id
+    unless current_user.id == @user.id || current_user.admin
       raise AccessDenied
     end
   end
