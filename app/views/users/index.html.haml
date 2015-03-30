@@ -8,16 +8,15 @@
       %tr
         %th Name
         %th Email
-    - @user.each do |user|
+    - @users.each do |user|
       %tr
         %td
           = link_to user.first_name + ' ' + user.last_name , user_path(user)
-        %td
-          -user.memberships.each do |membership|
-            -current_user.memberships.each do |user_membership|
-              -if current_user.id == user.id || membership.id == user_membership.id || current_user.admin
-                = mail_to user.email
-                %td.text-right
-                  = link_to 'Edit', edit_user_path(user)
-              -else
-                %td
+        -user.memberships.each do |membership|
+          -if current_user.id == user.id
+            %td  
+              = mail_to user.email
+            %td.text-right
+              = link_to 'Edit', edit_user_path(user)
+          -else
+            %td.text-right

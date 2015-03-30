@@ -32,7 +32,6 @@ feature 'User can log in and out' do
     fill_in :password, with: 'bob'
     click_button 'Sign In'
 
-    expect(current_path).to eq root_path
     expect(page).to have_content 'Bob Dole'
   end
 

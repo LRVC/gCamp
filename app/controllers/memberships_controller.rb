@@ -5,8 +5,8 @@ class MembershipsController < ApplicationController
     @project = Project.find(params[:project_id])
   end
   before_action :check_member
-  before_action :find_member, only: [:edit, :update, :destroy]
-  before_action :count_owners, only: [:index]
+  before_action :find_member, only: [:edit, :update ]
+  before_action :count_owners
 
   def index
     @membership = @project.memberships.new
@@ -30,15 +30,19 @@ class MembershipsController < ApplicationController
 
   def update
     @membership = @project.memberships.find(params[:id])
-    if @membership.update(memberships_params)
-      redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was updated successfully"
+    if (@owner_num > 1)
+      if @membership.update(params.require(:membership).permit(:role))
+        redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was updated successfully"
+      end
+    else
+        redirect_to project_memberships_path(@project), alert: "Projects must have at least one owner"
     end
   end
 
   def destroy
     membership = Membership.find(params[:id])
     membership.destroy
-    redirect_to project_path(@project), notice: "#{membership.user.full_name} successfully removed"
+    redirect_to projects_path, notice: "#{membership.user.full_name} successfully removed"
   end
 
   private
