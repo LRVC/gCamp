@@ -1,7 +1,7 @@
 .container
   .page-header
     .pull-right
-      -if current_user.id == @user.id  
+      -if current_user.id == @user.id || current_user.admin
         = link_to 'Edit', edit_user_path(@user), class:"btn btn-info"
     %div
       %h1= @user.first_name + ' ' + @user.last_name
