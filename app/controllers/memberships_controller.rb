@@ -84,8 +84,10 @@ class MembershipsController < ApplicationController
   end
 
   def verify_min_one_owner_destroy
-    if @current_membership.role == "Owner" && @owner_num <= 1
-      redirect_to project_memberships_path(@current_membership.project_id), alert: "Projects must have at least one owner"
+    if @current_membership.present?
+      if @current_membership.role == "Owner" && @owner_num <= 1
+        redirect_to project_memberships_path(@current_membership.project_id), alert: "Projects must have at least one owner"
+      end
     end
   end
 
