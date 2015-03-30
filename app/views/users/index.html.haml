@@ -26,8 +26,11 @@
           -if current_user.id == user.id || current_user.project_member_of(user)
             %td
               =mail_to user.email
-            %td
-              =link_to 'Edit', edit_user_path(user)
+            -if current_user.id == user.id
+              %td
+                =link_to 'Edit', edit_user_path(user)
+            -else
+              %td
           -else
             %td
             %td
