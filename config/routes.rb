@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get 'sign-out', to: 'authentication#destroy'
 
+  resources :pivotal_tracker, only: [:index]
+
   resources :users
 
   resources :projects do

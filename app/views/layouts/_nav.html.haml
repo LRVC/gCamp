@@ -8,7 +8,7 @@
           Projects
           %b.caret
         %ul.dropdown-menu{"role" => "menu"}
-          -@current_user.projects.each do |project|
+          -current_user.projects.each do |project|
             %li= link_to "#{project.name}", project_path(project)
           %li.divider
             %li= link_to 'New Project', new_project_path
