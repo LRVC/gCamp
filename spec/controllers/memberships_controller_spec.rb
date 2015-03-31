@@ -14,11 +14,24 @@ describe MembershipsController do
     end
   end
 
+  describe 'GET #edit' do
+    it 'redirects a user if they are not a member of that project' do
+      User.destroy_all
+      user = User.create!(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: false)
+      session[:user_id] = user.id
+      project = Project.create!(name: 'Sunshine')
+      membership = Membership.create!(user_id: user.id, project_id: project.id, role: 'Member')
+
+      get :update, project_id: project.id, id: membership.id
+
+      expect(response).to redirect_to project_path(project)
+    end
+  end
   describe 'POST #create' do
     describe 'on success' do
       it 'creates a new membership with valid parameters' do
         User.destroy_all
-        user = User.create!(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: false)
+        user = User.create!(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: true)
         session[:user_id] = user.id
         project = Project.create!(name: 'Sunshine')
         full_name = user.first_name.capitalize + " " + user.last_name.capitalize
@@ -53,12 +66,12 @@ describe MembershipsController do
         it 'updates a membership when given valid params' do
           User.destroy_all
           user = User.create!(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: false)
+          session[:user_id] = user.id
           project = Project.create!(name: 'Sunshine')
           membership = Membership.create!(user_id: user.id, project_id: project.id, role: 'Owner')
 
           user2 = User.create!(first_name: 'Bob', last_name: 'Ross', email: 'bob@ross.com', password: 'bob', admin: false)
-          project2 = Project.create!(name: 'Sunshine')
-          membership = Membership.create!(user_id: user2.id, project_id: project2.id, role: 'Owner')
+          membership2 = Membership.create!(user_id: user2.id, project_id: project.id, role: 'Owner')
 
 
           expect {
@@ -68,9 +81,25 @@ describe MembershipsController do
           }.to change { membership.reload.role }.from('Owner').to('Member')
         end
       end
-
-
     end
 
+    describe "DELETE #destroy" do
+      it 'deletes a membership' do
+        User.destroy_all
+        user = User.create!(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: true)
+        user2 = User.create!(first_name: 'Bob', last_name: 'Ross', email: 'bob@ross.com', password: 'bob', admin: true)
+        session[:user_id] = user.id
+        project = Project.create!(name: 'Sunshine')
+        membership = Membership.create!(user_id: user.id, project_id: project.id, role: 'Owner')
+        membership2 = Membership.create!(user_id: user2.id, project_id: project.id, role: 'Owner')
+
+        expect {
+          delete :destroy, project_id: project.id, id: membership.id
+        }.to change { Membership.all.count }.by(-1)
+
+        expect(flash[:notice]).to eq "Bob Dole successfully removed"
+        expect(response).to redirect_to projects_path
+      end
+    end
 
 end
