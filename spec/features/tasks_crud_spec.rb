@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Tasks CRUD' do
 
   before :each do
+    User.destroy_all
     user = User.new(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: true)
     user.save!
     visit root_path

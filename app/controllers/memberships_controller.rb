@@ -34,7 +34,7 @@ class MembershipsController < ApplicationController
     if @membership.update(params.require(:membership).permit(:role))
       redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was updated successfully"
     else
-      redirect_to projects_path, notice: "This shit is broken"
+      redirect_to projects_path
     end
   end
 
