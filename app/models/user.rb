@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
   def project_member_of(user)
     user.projects.map(&:users).flatten.include?(self)
   end
+
+  def display_token
+    self.tracker_token[0..3] + ('*'*(self.tracker_token.length - 4))
+  end
 end

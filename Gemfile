@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'faraday', '~> 0.9.0'
+
 gem 'bootstrap-sass', '~> 3.3.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

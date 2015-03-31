@@ -23,6 +23,10 @@
       %label.col-sm-2.control-label Password Confirmation
       .col-sm-6
         = f.password_field :password_confirmation, class: "form-control"
+    .form-group
+      %label.col-sm-2.control-label Pivotal Tracker Token
+      .col-sm-6
+        = f.text_field :tracker_token, class: "form-control"
     -if current_user.admin
       .form-group
         %label.col-sm-2.control-label Admin
