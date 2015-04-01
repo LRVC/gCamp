@@ -74,6 +74,6 @@ feature 'Tasks CRUD' do
     click_link 'New Task'
 
     click_button 'Create Task'
-    expect(page).to have_content "2 errors prohibited this form from being saved:"
+    expect(page).to have_content "1 error prohibited this form from being saved:"
   end
 end
