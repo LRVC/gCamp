@@ -7,3 +7,6 @@ class PivotalTrackerController < ApplicationController
     end
   end
 end
+
+
+{name: 'Name', color: 'Blue'}
