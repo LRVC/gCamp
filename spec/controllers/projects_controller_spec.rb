@@ -22,7 +22,6 @@ describe ProjectsController do
       user = User.create!(first_name: 'Bob', last_name: 'Dole', email: 'bob@dole.com', password: 'bob', admin: false)
       session[:user_id] = user.id
       project = Project.create!(name: 'Sunshine')
-      Membership.create!(user_id: user.id, project_id: project.id, role: 'Owner')
 
       get :new
 
